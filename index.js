@@ -7,6 +7,8 @@ import resolvers from "./src/resolvers/digimonResolver.js";
 import "dotenv/config";
 import mongoose from "mongoose";
 
+const app = express();
+
 const startServer = async () => {
 
   const app = express();
@@ -22,7 +24,7 @@ const startServer = async () => {
 
   server.applyMiddleware({
     app,
-    path: "/api",
+    path: "/",
   });
 
   httpServer
