@@ -11,5 +11,3 @@ const query = gql`
 `;
 
 export default query;
-
-// img(id: ID!): Info.img

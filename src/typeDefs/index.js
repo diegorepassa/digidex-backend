@@ -5,4 +5,3 @@ import types from "./types.js"
 const typeDefs = [query, mutation, types];
 
 export default typeDefs;
-
