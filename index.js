@@ -1,5 +1,5 @@
 import { ApolloServer } from "apollo-server";
-import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core'
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core'
 import typeDefs from "./src/typeDefs/index.js";
 import resolvers from "./src/resolvers/digimonResolver.js";
 
@@ -13,7 +13,7 @@ const startServer = async () => {
     typeDefs, 
     resolvers,
     plugins: [
-      ApolloServerPluginLandingPageLocalDefault
+      ApolloServerPluginLandingPageGraphQLPlayground
     ]
   });
 
