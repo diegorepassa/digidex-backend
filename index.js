@@ -1,5 +1,5 @@
 import { ApolloServer } from "apollo-server";
-import express from "express";
+import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core'
 import typeDefs from "./src/typeDefs/index.js";
 import resolvers from "./src/resolvers/digimonResolver.js";
 
@@ -8,12 +8,13 @@ import mongoose from "mongoose";
 
 const startServer = async () => {
 
-  const app = express();
-
   const server = new ApolloServer({ 
     playground: true,
     typeDefs, 
-    resolvers 
+    resolvers,
+    plugins: [
+      ApolloServerPluginLandingPageLocalDefault
+    ]
   });
 
   server
