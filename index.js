@@ -44,10 +44,7 @@ app.get('/get-digimon', async (req, res) => {
     const digimons = await Digimon.find();
     try {
         res.status(200).json({
-            status: 'Success',
-            data: {
-                digimons
-            }
+            digimons
         })
     } catch (err) {
         res.status(500).json({
