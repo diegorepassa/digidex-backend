@@ -1,29 +1,51 @@
-import { ApolloServer } from "apollo-server"
-import typeDefs from "./src/typeDefs/index.js"
-import resolvers from "./src/resolvers/digimonResolver.js"
+import { ApolloServer, gql } from "apollo-server-express";
+import { createServer } from "http";
+import express from "express";
+import typeDefs from "./src/typeDefs/index.js";
+import resolvers from "./src/resolvers/digimonResolver.js";
 
-import 'dotenv/config'
-import mongoose from "mongoose"
+import "dotenv/config";
+import mongoose from "mongoose";
 
-// MongoDB database
-const db = {
-  uri: process.env.DB_URI,
-}
+const startServer = async () => {
 
-const dbOption = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}
+  const app = express();
+  const httpServer = createServer(app)
 
-mongoose.connect(db.uri, dbOption)
-  .then(( () => console.log("Connected to MongoDB")))
-  .catch((err) => console.log("Failed to connect to MongoDB", err))
+  const server = new ApolloServer({ 
+    playground: true,
+    typeDefs, 
+    resolvers 
+  });
 
+  await server.start()
 
-// GraphQL server
+  server.applyMiddleware({
+    app,
+    path: "/api",
+  });
 
-const server = new ApolloServer({ typeDefs, resolvers })
-server
-  .listen({ port: process.env.DB_PORT || 4000 })
-  .then(({ url }) => console.log(`🚀 Server ready at ${url}`))
-  .catch(error => console.log("Server failed: ", error))
+  httpServer
+    .listen({ port: process.env.DB_PORT || 4000 }, () => {
+      console.log(`🚀 Server ready at ${process.env.DB_PORT}`)
+    })
+};
+
+const startMongoDB = async () => {
+  const db = {
+    uri: process.env.DB_URI,
+  };
+
+  const dbOption = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  };
+
+  mongoose
+    .connect(db.uri, dbOption)
+    .then(() => console.log("📦 Connected to MongoDB"))
+    .catch((err) => console.log("Failed to connect to MongoDB", err));
+};
+
+startServer();
+startMongoDB();
