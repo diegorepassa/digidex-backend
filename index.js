@@ -12,6 +12,7 @@ const startServer = async () => {
     playground: true,
     typeDefs,
     resolvers,
+    introspection: true,
     plugins: [
       ApolloServerPluginLandingPageGraphQLPlayground
     ]
