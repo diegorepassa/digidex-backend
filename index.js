@@ -10,7 +10,7 @@ const startServer = async () => {
 
   const server = new ApolloServer({ 
     playground: true,
-    typeDefs, 
+    typeDefs,
     resolvers,
     plugins: [
       ApolloServerPluginLandingPageGraphQLPlayground
@@ -19,7 +19,7 @@ const startServer = async () => {
 
   server
     .listen(process.env.PORT || 5000, () => {
-      console.log(`🚀 Server ready at ${process.env.PORT}`)
+      console.log(`🚀 Server ready at ${process.env.DB_PORT}`)
     })
 };
 
@@ -36,7 +36,7 @@ const startMongoDB = async () => {
   mongoose
     .connect(db.uri, dbOption)
     .then(() => console.log("📦 Connected to MongoDB"))
-    .catch((err) => console.log("Failed to connect to MongoDB", err));
+    .catch((err) => console.log("❌ Failed to connect to MongoDB", err));
 };
 
 startServer();

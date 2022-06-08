@@ -3,7 +3,7 @@ import Digimon from "../../models/Digimon.js";
 const digimonResolver = {
    Query: {
       async digimons() {
-         return await Digimon.find();
+         return await Digimon.find().limit(27);
       },
       async digimonById(_, { id }) {
          return await Digimon.findById(id);
@@ -24,15 +24,16 @@ const digimonResolver = {
          return await newDigimon.save();
       },
       async updateDigimon(_, { id, digimon }) {
-         return await findByIdAndUpdate(id, digimon, {
+         const updatedDigimon = await Digimon.findOneAndUpdate(id, digimon, {
             new: true,
-            useFindAndModify: false,
          });
+         console.log(updatedDigimon);
+         return updatedDigimon;
       },
       async deleteDigimon(_, { id }) {
-         return await findByIdAndRemove(id, {
-            useFindAndModify: false,
-         });
+         const deleteDigimon = await Digimon.findByIdAndDelete(id);
+         console.log(deleteDigimon);
+         return deleteDigimon;
       },
    },
 };

@@ -3,7 +3,7 @@ import { gql } from "apollo-server";
 const mutation = gql`
    type Mutation {
       createDigimon(digimon: DigimonInput): Digimon
-      updateDigimon(id: String, digimon: DigimonInput): Digimon
+      updateDigimon(id: ID!, digimon: DigimonInput): Digimon
       deleteDigimon(id: String): Digimon
    }
    input DigimonInput {
