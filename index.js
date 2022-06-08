@@ -18,7 +18,7 @@ const startServer = async () => {
   });
 
   server
-    .listen(process.env.PORT || 5000, () => {
+    .listen(process.env.PORT || 4000, () => {
       console.log(`🚀 Server ready at ${process.env.DB_PORT}`)
     })
 };
