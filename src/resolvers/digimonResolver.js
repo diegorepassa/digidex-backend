@@ -3,7 +3,7 @@ import Digimon from "../../models/Digimon.js";
 const digimonResolver = {
    Query: {
       async digimons() {
-         return await Digimon.find().limit(27);
+         return await Digimon.find().limit(100);
       },
       async digimonById(_, { id }) {
          return await Digimon.findById(id);
